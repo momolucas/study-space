@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "428522572639",
+    "firebase_url": "https://study-place-785f7-default-rtdb.firebaseio.com",
+    "project_id": "study-place-785f7",
+    "storage_bucket": "study-place-785f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428522572639:android:f710213e19b127507604ea",
+        "android_client_info": {
+          "package_name": "com.google.firebase.example.fireeats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428522572639-vdav0ifee2oikbqsr9uvjdv5m7mu8374.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcJNtSvclkM4j4g07rBpNfeKKvGNQ8PXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428522572639-vdav0ifee2oikbqsr9uvjdv5m7mu8374.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
