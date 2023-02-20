@@ -1,4 +1,4 @@
-package momoluc.study_samples.ui.theme
+package momolucas.dominando_android.obj_between_activities.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
