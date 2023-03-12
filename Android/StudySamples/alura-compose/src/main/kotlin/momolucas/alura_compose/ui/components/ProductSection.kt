@@ -1,8 +1,9 @@
 package momolucas.alura_compose.ui.components
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import momolucas.alura_compose.model.Product
 import momolucas.alura_compose.sampledata.sampleProducts
+import momolucas.alura_compose.ui.theme.StudySamplesTheme
 
 @Composable
 fun ProductSection(title: String, products: List<Product>) {
@@ -22,17 +24,15 @@ fun ProductSection(title: String, products: List<Product>) {
             fontSize = 20.sp,
             fontWeight = FontWeight(400)
         )
-        Row(
+        LazyRow(
             Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp)
         ) {
-            Spacer(Modifier)
-            for (p in products) {
-                ProductItem(product = p)
+            items(products) { product ->
+                ProductItem(product = product)
             }
-            Spacer(Modifier)
         }
     }
 }
@@ -40,6 +40,10 @@ fun ProductSection(title: String, products: List<Product>) {
 @Preview(showBackground = true)
 @Composable
 fun ProductSectionPreview() {
-    ProductSection("Promoções", sampleProducts)
+    StudySamplesTheme {
+        Surface {
+            ProductSection("Promoções", products = sampleProducts)
+        }
+    }
 }
 

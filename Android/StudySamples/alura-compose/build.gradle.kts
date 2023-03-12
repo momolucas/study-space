@@ -49,4 +49,5 @@ dependencies {
     baseImplementation()
     materialImplementation()
     composeImplementation()
+    implementation("io.coil-kt:coil-compose:${Tools.coil}")
 }

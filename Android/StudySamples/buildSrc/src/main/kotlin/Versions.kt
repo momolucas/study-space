@@ -22,3 +22,7 @@ object Compose {
     const val material = "1.3.1"
     const val compiler = "1.4.0"
 }
+
+object Tools {
+    const val coil = "2.3.0"
+}
