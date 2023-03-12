@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import momolucas.alura_compose.sampledata.sampleSections
+import momolucas.alura_compose.ui.theme.StudySamplesTheme
 
 class AluraComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,9 +20,11 @@ class AluraComposeActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    momolucas.alura_compose.ui.theme.StudySamplesTheme {
-        Surface {
-            momolucas.alura_compose.ui.screens.HomeScreen()
+    StudySamplesTheme {
+        StudySamplesTheme {
+            Surface {
+                momolucas.alura_compose.ui.screens.HomeScreen(sampleSections)
+            }
         }
     }
 }
