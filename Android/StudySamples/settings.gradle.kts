@@ -13,5 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Study Samples"
-include ':app'
-include ':alura-compose'
+include(":app", ":core", ":alura-compose")
