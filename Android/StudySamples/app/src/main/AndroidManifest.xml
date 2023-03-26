@@ -12,7 +12,7 @@
         android:theme="@style/Theme.StudySamples"
         tools:targetApi="31">
         <activity
-            android:name="momolucas.alura_compose.AluraComposeActivity"
+            android:name="momolucas.study_samples.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.StudySamples"
             android:exported="true">
