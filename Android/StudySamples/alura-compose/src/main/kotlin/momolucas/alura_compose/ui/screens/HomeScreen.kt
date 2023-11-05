@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import momolucas.alura_compose.model.Product
+import momolucas.alura_compose.sampledata.sampleCandies
+import momolucas.alura_compose.sampledata.sampleDrinks
 import momolucas.alura_compose.sampledata.sampleProducts
 import momolucas.alura_compose.sampledata.sampleSections
 import momolucas.alura_compose.ui.components.CardProductItem
@@ -24,44 +26,78 @@ import momolucas.alura_compose.ui.components.ProductSection
 import momolucas.alura_compose.ui.components.SearchTextField
 import momolucas.alura_compose.ui.theme.StudySamplesTheme
 
+class HomeScreenUiState(
+    val sections: Map<String, List<Product>>,
+    val searchedProducts: List<Product> = emptyList(),
+    val searchText: String = "",
+    val onSearchChange: (String) -> Unit = {}
+) {
+    fun isShowActions() = searchText.isBlank()
+}
+
+
+@Composable
+fun HomeScreen(products: List<Product>) {
+    val sections = mapOf(
+        "Todos os produtos" to products,
+        "Promoções" to sampleDrinks + sampleCandies,
+        "Doces" to sampleCandies,
+        "Bebidas" to sampleDrinks
+    )
+
+    var text by remember { mutableStateOf("") }
+
+    fun containsInNameOrDescription() = { product: Product ->
+        product.name.contains(text, ignoreCase = true)
+                || product.description.contains(text, ignoreCase = true)
+    }
+
+    val searchedProducts =
+        if (text.isNotBlank()) {
+            sampleProducts.filter(containsInNameOrDescription()) +
+                    products.filter(containsInNameOrDescription())
+        } else {
+            emptyList()
+        }
+
+    val state = remember(products, text) {
+        HomeScreenUiState(
+            sections = sections,
+            searchedProducts = searchedProducts,
+            searchText = text,
+            onSearchChange = {
+                text = it
+            }
+        )
+    }
+    HomeScreen(state = state)
+}
+
 @Composable
 fun HomeScreen(
-    sections: Map<String, List<Product>>
+    state: HomeScreenUiState
 ) {
     Column {
-        var text by remember { mutableStateOf("") }
         SearchTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            value = text,
-            onValueChange = {
-                text = it
-            }
+            value = state.searchText,
+            onValueChange = state.onSearchChange
         )
-        val searchedProducts = remember(text) {
-            if (text.isNotBlank()) {
-                sampleProducts.filter {
-                    it.name.contains(text, ignoreCase = true)
-                            || it.description.contains(text, ignoreCase = true)
-                }
-            } else {
-                emptyList()
-            }
-        }
         LazyColumn(
             Modifier
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            if (text.isNullOrBlank()) {
-                for (section in sections) {
+            if (state.isShowActions()) {
+                for (section in state.sections) {
                     item {
                         ProductSection(title = section.key, products = section.value)
                     }
                 }
             } else {
-                items(searchedProducts) {
+                items(state.searchedProducts) {
                     CardProductItem(product = it, Modifier.padding(horizontal = 16.dp))
                 }
             }
@@ -74,7 +110,17 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     StudySamplesTheme {
         Surface {
-            HomeScreen(sampleSections)
+            HomeScreen(HomeScreenUiState(sampleSections))
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenSearchPreview() {
+    StudySamplesTheme {
+        Surface {
+            HomeScreen(HomeScreenUiState(sampleSections, searchText = "a"))
         }
     }
 }

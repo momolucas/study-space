@@ -12,16 +12,18 @@
         android:theme="@style/Theme.StudySamples"
         tools:targetApi="31">
         <activity
-            android:name="momolucas.alura_compose.AluraComposeActivity"
+            android:name="momolucas.alura_compose.ui.activities.AluraComposeActivity"
+            android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.StudySamples"
-            android:exported="true">
+            android:theme="@style/Theme.StudySamples">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="momolucas.alura_compose.ui.activities.ProductFormActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
-
 </manifest>
